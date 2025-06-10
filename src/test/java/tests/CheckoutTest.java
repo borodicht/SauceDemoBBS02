@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,18 @@ public class CheckoutTest extends BaseTest {
         checkoutPage.setInputValues("Dina","Knyazeva","123456");
     }
 
-    @Test
+
+    @Epic("Заполнение информации о покупателе")
+    @Feature("Форма покупателя")
+    @Story("Ввод пустого имени в форме")
+    @Description("Проверка регистрации покупателя с пустым полем для имени")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Dina Knyazeva")
+    @TmsLink("SD-01")
+    @Issue("SD-BUG-01")
+    @Link(name = "Документация", url = "https://github.com/borodicht/AllureReportingGoogle")
+    @Flaky
+    @Test (testName = "Негативный тест формы покупателя")
     public void checkInputsWithEmptyFirstName() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -62,16 +74,5 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutPage.getErrorMessage(),
                 "Error: Postal Code is required",
                 "Сообщение об ошибке не появилось");
-
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-//        WebElement element = driver.findElement(By.id("id"));
-//        element.click();
-//        Actions action = new Actions(driver);
-//        action.click(element).perform();
-//
-//
-//        js.executeScript("arguments[0].click();", element);
     }
 }

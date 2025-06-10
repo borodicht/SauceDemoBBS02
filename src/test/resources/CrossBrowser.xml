@@ -8,8 +8,6 @@
         <classes>
             <class name="tests.LoginTest"/>
             <parameter name="browser" value="chrome"/>
-            <parameter name="user" value="standart_user"/>
-            <parameter name="password" value="secret_sauce"/>
         </classes>
     </test> <!-- Test -->
     <test name="Firefox">

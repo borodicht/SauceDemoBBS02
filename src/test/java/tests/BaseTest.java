@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.CartPage;
 import pages.CheckoutPage;
@@ -22,8 +24,8 @@ public class BaseTest {
     CheckoutPage checkoutPage;
 
     @Parameters({"browser"})
-    @BeforeMethod
-    public void setup(@Optional("chrome") String browser){
+    @BeforeMethod (alwaysRun = true)
+    public void setup(@Optional("chrome") String browser, ITestContext context){
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -45,10 +47,14 @@ public class BaseTest {
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
 
+        context.setAttribute("driver", driver);
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown(){
+    public void tearDown(ITestResult result){
+        if (ITestResult.FAILURE == result.getStatus()) {
+            AllureUtils.takeScreenshot(driver);
+        }
         driver.quit();
     }
 }

@@ -1,7 +1,9 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import tests.AllureUtils;
 
 public class CheckoutPage extends BasePage {
 
@@ -20,10 +22,12 @@ public class CheckoutPage extends BasePage {
         return driver.findElement(TITLE).getText();
     }
 
-    public void setInputValues(String first_name, String last_name, String zip_code) {
-        driver.findElement(FIRST_NAME).sendKeys(first_name);
-        driver.findElement(LAST_NAME).sendKeys(last_name);
-        driver.findElement(ZIP_CODE).sendKeys(zip_code);
+    @Step("Заполнение формы покупателя с именем: {firstName}, фамилией: {lastName} и индексом: {zipCode}")
+    public void setInputValues(String firstName, String lastName, String zipCode) {
+        driver.findElement(FIRST_NAME).click();
+        driver.findElement(FIRST_NAME).sendKeys(firstName);
+        driver.findElement(LAST_NAME).sendKeys(lastName);
+        driver.findElement(ZIP_CODE).sendKeys(zipCode);
         clickJS(driver.findElement(CONTINUE));
     }
 
