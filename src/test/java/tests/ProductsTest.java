@@ -9,7 +9,7 @@ public class ProductsTest extends BaseTest{
     @Test
     public void checkSort() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         assertEquals(productsPage.getTitle(),
                 "Products",
                 "Страница не открылась");
@@ -19,7 +19,7 @@ public class ProductsTest extends BaseTest{
     @Test
     public void checkAddToCart() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         assertEquals(productsPage.getTitle(),
                 "Products",
                 "Страница не открылась");

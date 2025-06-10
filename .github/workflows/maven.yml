@@ -21,6 +21,10 @@ jobs:
 
     runs-on: windows-latest
 
+    env:
+      LOGIN: ${{secrets.SD_USER}}
+      PASS: ${{secrets.SD_PASSWORD}}
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -34,5 +38,5 @@ jobs:
         browser: edge
         version: latest
     - name: Running tests
-      run: mvn clean test
+      run: mvn clean test -Duser=$LOGIN -Dpassword=$PASS
 

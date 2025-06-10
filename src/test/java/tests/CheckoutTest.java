@@ -11,7 +11,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void checkInputsWithPositiveCred() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.AddToCart();
         cartPage.checkout();
         assertEquals(checkoutPage.getTitle(),
@@ -34,7 +34,7 @@ public class CheckoutTest extends BaseTest {
     @Test (testName = "Негативный тест формы покупателя")
     public void checkInputsWithEmptyFirstName() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.AddToCart();
         cartPage.checkout();
         assertEquals(checkoutPage.getTitle(),
@@ -49,7 +49,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void checkInputsWithEmptyLastName() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.AddToCart();
         cartPage.checkout();
         assertEquals(checkoutPage.getTitle(),
@@ -64,7 +64,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void checkInputsWithEmptyZipCode() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.AddToCart();
         cartPage.checkout();
         assertEquals(checkoutPage.getTitle(),

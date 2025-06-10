@@ -9,7 +9,7 @@ public class CartTest extends BaseTest {
     @Test
     public void checkCheckoutButton() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.ProductSort();
         productsPage.AddToCart();
         assertEquals(cartPage.getTitle(),

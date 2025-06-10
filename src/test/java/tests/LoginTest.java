@@ -13,7 +13,7 @@ public class LoginTest extends BaseTest {
     retryAnalyzer = Retry.class)
     public void checkLoginWithEmptyPassword() {
         loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.login(user, "");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Password is required",
                 "Сообщение об ошибке не появилось");
@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 1)
     public void checkLoginWithWrongPassword() {
         loginPage.open();
-        loginPage.login("standard_user", "1234567");
+        loginPage.login(user, "1234567");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username and password do not match any user in this service",
                 "Сообщение об ошибке не появилось");
@@ -31,7 +31,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 4)
     public void checkLoginWithEmptyUsername() {
         loginPage.open();
-        loginPage.login("", "secret_sauce");
+        loginPage.login("", password);
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
                 "Сообщение об ошибке не появилось");
@@ -40,7 +40,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 3)
     public void checkLoginWithPositiveCred() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         assertEquals(productsPage.getTitle(),
                 "Products",
                 "Сообщение об ошибке не появилось");
@@ -49,9 +49,9 @@ public class LoginTest extends BaseTest {
     @DataProvider (name = "Негативные тесты логина")
     public Object[][] negativeTest() {
         return new Object[][] {
-                {"standard_user", "", "Epic sadface: Password is required"},
-                {"standard_user", "1234567", "Epic sadface: Username and password do not match any user in this service"},
-                {"", "secret_sauce", "Epic sadface: Username is required"}
+                {user, "", "Epic sadface: Password is required"},
+                {user, "1234567", "Epic sadface: Username and password do not match any user in this service"},
+                {"", password, "Epic sadface: Username is required"}
         };
     }
 

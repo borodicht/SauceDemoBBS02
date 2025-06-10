@@ -26,6 +26,9 @@ public class BaseTest {
     CartPage cartPage;
     CheckoutPage checkoutPage;
 
+    String user = System.getProperty("user");
+    String password = System.getProperty("password");
+
     @Parameters({"browser"})
     @BeforeMethod (alwaysRun = true)
     public void setup(@Optional("chrome") String browser, ITestContext context){
@@ -54,6 +57,9 @@ public class BaseTest {
         checkoutPage = new CheckoutPage(driver);
 
         context.setAttribute("driver", driver);
+
+        System.out.println(user);
+        System.out.println(password);
     }
 
     @AfterMethod(alwaysRun = true)
